@@ -25,9 +25,10 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> initPlatformState() async {
     String initResult;
-    KushkiResponse response;
+    KushkiResponse? response;
     try {
-      final init = await FlutterKushkiLibrary.initKushki('merchant-id', currency: KushkiCurrency.COP);
+      final init = await FlutterKushkiLibrary.initKushki('merchant-id',
+          currency: KushkiCurrency.COP);
       initResult = init.code == KushkiReponceCode.SUCCESS ? "SUCCESS" : "ERROR";
       KushkiCard card = KushkiCard();
       card.name = 'Aagtje Blokland';
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       _platformVersion = initResult;
       try {
         _cardToken = response?.token ?? 'again unknown';
-      } catch(e) {
+      } catch (e) {
         print('error 2');
         print('error 2: $e');
       }
@@ -66,7 +67,8 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Kushki Library Plugin'),
         ),
         body: Center(
-          child: Text('Kushki init result: $_platformVersion\n token: $_cardToken'),
+          child: Text(
+              'Kushki init result: $_platformVersion\n token: $_cardToken'),
         ),
       ),
     );
